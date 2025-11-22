@@ -1,0 +1,282 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    margin: -20px -20px 40px -20px;
+}
+
+header h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* Introduction */
+.intro {
+    padding: 40px 60px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #667eea;
+    margin-bottom: 60px;
+}
+
+.lead {
+    font-size: 1.3em;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.intro p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Visualization sections */
+.visualization-section {
+    margin-bottom: 80px;
+}
+
+.visualization-section h2 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #667eea;
+}
+
+.description {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+/* Chart containers */
+.chart-container {
+    background-color: #fff;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    min-height: 400px;
+}
+
+/* Insight boxes */
+.insight-box {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-size: 1em;
+    line-height: 1.7;
+}
+
+.insight-box strong {
+    color: #856404;
+}
+
+/* Conclusion */
+.conclusion {
+    padding: 50px 60px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 8px;
+    margin: 60px 0 40px 0;
+}
+
+.conclusion h2 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.conclusion p {
+    font-size: 1.15em;
+    line-height: 1.9;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #2c3e50;
+    color: white;
+    margin: 60px -20px -20px -20px;
+}
+
+footer p {
+    margin-bottom: 10px;
+    font-size: 0.95em;
+}
+
+footer a {
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #5566d8;
+    text-decoration: underline;
+}
+
+/* D3 Chart Styles */
+.axis {
+    font-size: 12px;
+}
+
+.axis path,
+.axis line {
+    stroke: #ccc;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    fill: #666;
+}
+
+.line {
+    fill: none;
+    stroke-width: 2px;
+}
+
+.area {
+    opacity: 0.7;
+}
+
+.tooltip {
+    position: absolute;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: 6px;
+    pointer-events: none;
+    font-size: 13px;
+    line-height: 1.5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.legend {
+    font-size: 14px;
+}
+
+.legend-item {
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.legend-item:hover {
+    opacity: 0.7;
+}
+
+.legend-item.dimmed {
+    opacity: 0.3;
+}
+
+/* Party colors */
+.democratic {
+    fill: #4A90E2;
+    stroke: #4A90E2;
+}
+
+.republican {
+    fill: #E24A4A;
+    stroke: #E24A4A;
+}
+
+.other {
+    fill: #9B9B9B;
+    stroke: #9B9B9B;
+}
+
+/* Bar chart styles */
+.bar {
+    transition: opacity 0.3s;
+}
+
+.bar:hover {
+    opacity: 0.8;
+}
+
+/* Grid lines */
+.grid line {
+    stroke: #e0e0e0;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    .intro {
+        padding: 20px;
+    }
+
+    .lead {
+        font-size: 1.1em;
+    }
+
+    .visualization-section h2 {
+        font-size: 1.5em;
+    }
+
+    .chart-container {
+        padding: 15px;
+        min-height: 300px;
+    }
+
+    .conclusion {
+        padding: 30px 20px;
+    }
+}

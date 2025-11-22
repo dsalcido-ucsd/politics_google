@@ -4,30 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interfaces of Power: Visualizing U.S. Political Use of Google</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Interfaces of Power</h1>
-        <p>Visualizing U.S. Political Use of Google</p>
-    </header>
-    <main>
-        <section id="political-ads">
-            <h2>Political Advertising</h2>
-            <div id="ads-visualization"></div>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Interfaces of Power</h1>
+            <p class="subtitle">Visualizing U.S. Political Use of Google's Advertising, Data, and Content Systems</p>
+        </header>
+
+        <!-- Introduction -->
+        <section class="intro">
+            <p class="lead">
+                Google serves as a critical infrastructure for political power in America. 
+                Political actors interact with Google through three distinct but interconnected systems: 
+                <strong>advertising platforms</strong> for persuasion, 
+                <strong>data requests</strong> for surveillance, and 
+                <strong>content removal requests</strong> for censorship.
+            </p>
+            <p>
+                This explorable explanation reveals how these "interfaces of power" operate across time, 
+                showing patterns that emerge during election cycles, across presidential administrations, 
+                and through different political parties.
+            </p>
         </section>
-        <section id="user-data-requests">
-            <h2>User Data Requests</h2>
-            <div id="data-requests-visualization"></div>
+
+        <!-- Visualization 1: Political Advertising by Party -->
+        <section class="visualization-section">
+            <h2>1. The Persuasion Machine: Political Ad Spending</h2>
+            <p class="description">
+                Political parties spend billions to reach voters through Google's advertising platforms. 
+                This chart shows weekly spending by Democratic, Republican, and other advertisers since 2018. 
+                Notice the dramatic spikes during election cycles.
+            </p>
+            <div id="ads-chart" class="chart-container"></div>
+            <div class="insight-box">
+                <strong>Key Insight:</strong> "Other" advertisers (PACs, advocacy groups, ballot measures) 
+                outspend both major parties combined, representing $1.56 billion vs. $359M (Democratic) 
+                and $285M (Republican). Spending peaks sharply before November elections.
+            </div>
         </section>
-        <section id="content-removal-requests">
-            <h2>Content Removal Requests</h2>
-            <div id="content-removal-visualization"></div>
+
+        <!-- Visualization 2: User Data Requests -->
+        <section class="visualization-section">
+            <h2>2. The Surveillance Interface: Government Data Requests</h2>
+            <p class="description">
+                The U.S. government regularly requests user information from Google through legal processes 
+                like subpoenas and search warrants. This visualization tracks over 1 million requests 
+                affecting more than 2 million accounts since 2009.
+            </p>
+            <div id="requests-chart" class="chart-container"></div>
+            <div class="insight-box">
+                <strong>Key Insight:</strong> Government surveillance through Google has grown steadily, 
+                from ~3,600 requests in 2009 to over 60,000 per period by 2024. Google's disclosure rate 
+                has fluctuated between 70-90% over time.
+            </div>
         </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 Interfaces of Power Project</p>
-    </footer>
-    <script src="js/main.js"></script>
+
+        <!-- Visualization 3: Content Removal by Reason -->
+        <section class="visualization-section">
+            <h2>3. The Censorship Mechanism: Content Removal Requests</h2>
+            <p class="description">
+                Government agencies request Google to remove content for various reasons. 
+                This chart categorizes over 12,000 removal requests since 2011, 
+                revealing what types of content authorities seek to suppress.
+            </p>
+            <div id="removal-chart" class="chart-container"></div>
+            <div class="insight-box">
+                <strong>Key Insight:</strong> Defamation (6,731 requests) dominates content removal, 
+                followed by privacy concerns (1,346) and fraud (1,005). National security requests, 
+                while highly publicized, represent a smaller fraction of total removals.
+            </div>
+        </section>
+
+        <!-- Visualization 4: Geographic Distribution -->
+        <section class="visualization-section">
+            <h2>4. Battleground States: Where Political Ad Money Flows</h2>
+            <p class="description">
+                Political advertising concentrates in competitive states. 
+                This map reveals which states receive the most political ad spending.
+            </p>
+            <div id="map-chart" class="chart-container"></div>
+            <div class="insight-box">
+                <strong>Key Insight:</strong> California leads with $245M in spending (large population), 
+                followed by Pennsylvania ($189M), Michigan ($141M), and Georgia ($137M) — 
+                all critical swing states in recent elections.
+            </div>
+        </section>
+
+        <!-- Visualization 5: Aligned Small Multiples -->
+        <section class="visualization-section">
+            <h2>5. Three Timelines, One Platform</h2>
+            <p class="description">
+                When we align these three interfaces on the same timeline, patterns emerge. 
+                Hover over any point to see synchronized data across all three dimensions of power.
+            </p>
+            <div id="aligned-chart" class="chart-container"></div>
+            <div class="insight-box">
+                <strong>Key Insight:</strong> Political advertising follows a strong cyclical pattern 
+                tied to elections, while surveillance and content removal show steady, 
+                long-term growth independent of election cycles.
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="conclusion">
+            <h2>Understanding the Interfaces</h2>
+            <p>
+                These visualizations reveal how political power operates through Google's infrastructure. 
+                <strong>Persuasion</strong> (advertising) is cyclical, expensive, and partisan. 
+                <strong>Surveillance</strong> (data requests) is persistent, growing, and bipartisan. 
+                <strong>Censorship</strong> (content removal) focuses on individual reputation 
+                rather than political dissent.
+            </p>
+            <p>
+                Together, these three interfaces form a comprehensive picture of how government and 
+                political actors leverage one of the world's most powerful information platforms 
+                to shape public opinion, gather intelligence, and control online speech.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Data sources: 
+                <a href="https://transparencyreport.google.com/political-ads/home" target="_blank">Google Political Advertising Transparency Report</a>, 
+                <a href="https://transparencyreport.google.com/user-data/overview" target="_blank">Google User Data Requests</a>, 
+                <a href="https://transparencyreport.google.com/government-removals/overview" target="_blank">Google Government Removal Requests</a>
+            </p>
+            <p>Created for DSC 209 Data Visualization | University of California, San Diego</p>
+        </footer>
+    </div>
+
+    <!-- Load visualization scripts -->
+    <script src="src/js/utils/data-loader.js"></script>
+    <script src="src/js/visualizations/political-ads.js"></script>
+    <script src="src/js/visualizations/data-requests.js"></script>
+    <script src="src/js/visualizations/content-removal.js"></script>
+    <script src="src/js/main.js"></script>
 </body>
 </html>

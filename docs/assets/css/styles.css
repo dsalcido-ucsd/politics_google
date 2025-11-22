@@ -1,0 +1,302 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #e6eef8;
+    background-color: #071226;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #071026;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: linear-gradient(135deg, #0b3d91 0%, #264c7a 50%, #1e88ff 100%);
+    color: white;
+    margin: -20px -20px 40px -20px;
+    border-bottom: 2px solid rgba(111, 176, 255, 0.2);
+}
+
+header h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2em;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* Introduction */
+.intro {
+    padding: 40px 60px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-left: 4px solid #6fb0ff;
+    margin-bottom: 60px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-left: 4px solid #6fb0ff;
+}
+
+.lead {
+    font-size: 1.3em;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #e6eef8;
+}
+
+.intro p {
+    font-size: 1.1em;
+    color: #b8cfe6;
+    line-height: 1.8;
+}
+
+/* Visualization sections */
+.visualization-section {
+    margin-bottom: 80px;
+}
+
+.visualization-section h2 {
+    font-size: 2em;
+    color: #e6eef8;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #6fb0ff;
+}
+
+.description {
+    font-size: 1.1em;
+    color: #b8cfe6;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+/* Chart containers */
+.chart-container {
+    background-color: rgba(255, 255, 255, 0.02);
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    margin-bottom: 25px;
+    min-height: 400px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.4);
+}
+
+/* Insight boxes */
+.insight-box {
+    background-color: rgba(111, 176, 255, 0.08);
+    border-left: 4px solid #6fb0ff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-size: 1em;
+    line-height: 1.7;
+    color: #e6eef8;
+    border: 1px solid rgba(111, 176, 255, 0.15);
+}
+
+.insight-box strong {
+    color: #6fb0ff;
+}
+
+/* Conclusion */
+.conclusion {
+    padding: 50px 60px;
+    background: linear-gradient(135deg, #0b3d91 0%, #071226 100%);
+    border-radius: 8px;
+    margin: 60px 0 40px 0;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+}
+
+.conclusion h2 {
+    font-size: 2em;
+    color: #e6eef8;
+    margin-bottom: 20px;
+}
+
+.conclusion p {
+    font-size: 1.15em;
+    line-height: 1.9;
+    color: #b8cfe6;
+    margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #071226;
+    color: #b8cfe6;
+    margin: 60px -20px -20px -20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+footer p {
+    margin-bottom: 10px;
+    font-size: 0.95em;
+}
+
+footer a {
+    color: #6fb0ff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #9fc9ff;
+    text-decoration: underline;
+}
+
+/* D3 Chart Styles */
+.axis {
+    font-size: 12px;
+}
+
+.axis path,
+.axis line {
+    stroke: rgba(255, 255, 255, 0.1);
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    fill: #b8cfe6;
+}
+
+.axis-label {
+    fill: #e6eef8;
+    font-size: 14px;
+}
+
+.line {
+    fill: none;
+    stroke-width: 2px;
+}
+
+.area {
+    opacity: 0.7;
+}
+
+.tooltip {
+    position: absolute;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: 6px;
+    pointer-events: none;
+    font-size: 13px;
+    line-height: 1.5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.legend {
+    font-size: 14px;
+}
+
+.legend text {
+    fill: #e6eef8;
+}
+
+.legend-item {
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.legend-item:hover {
+    opacity: 0.7;
+}
+
+.legend-item.dimmed {
+    opacity: 0.3;
+}
+
+/* Party colors */
+.democratic {
+    fill: #4A90E2;
+    stroke: #4A90E2;
+}
+
+.republican {
+    fill: #E24A4A;
+    stroke: #E24A4A;
+}
+
+.other {
+    fill: #9B9B9B;
+    stroke: #9B9B9B;
+}
+
+/* Bar chart styles */
+.bar {
+    transition: opacity 0.3s;
+}
+
+.bar:hover {
+    opacity: 0.8;
+}
+
+/* Grid lines */
+.grid line {
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    .intro {
+        padding: 20px;
+    }
+
+    .lead {
+        font-size: 1.1em;
+    }
+
+    .visualization-section h2 {
+        font-size: 1.5em;
+    }
+
+    .chart-container {
+        padding: 15px;
+        min-height: 300px;
+    }
+
+    .conclusion {
+        padding: 30px 20px;
+    }
+}

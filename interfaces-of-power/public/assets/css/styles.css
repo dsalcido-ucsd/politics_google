@@ -45,7 +45,7 @@ header h1 {
 }
 
 /* Introduction */
-.intro {
+.intro, .project-progress {
     padding: 40px 60px;
     background-color: rgba(255, 255, 255, 0.03);
     border-left: 4px solid #6fb0ff;
@@ -62,10 +62,29 @@ header h1 {
     color: #e6eef8;
 }
 
-.intro p {
+.intro p, .project-progress p {
     font-size: 1.1em;
     color: #b8cfe6;
     line-height: 1.8;
+}
+
+.project-progress {
+    margin-bottom: 60px;
+}
+
+.project-progress h2 {
+    font-size: 1.8em;
+    color: #6fb0ff;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(111, 176, 255, 0.2);
+}
+
+.project-progress h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
 }
 
 /* Visualization sections */

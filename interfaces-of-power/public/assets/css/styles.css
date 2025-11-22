@@ -8,25 +8,26 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f5f5f5;
+    color: #e6eef8;
+    background-color: #071226;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #071026;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
 }
 
 /* Header */
 header {
     text-align: center;
     padding: 60px 20px 40px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0b3d91 0%, #264c7a 50%, #1e88ff 100%);
     color: white;
     margin: -20px -20px 40px -20px;
+    border-bottom: 2px solid rgba(111, 176, 255, 0.2);
 }
 
 header h1 {
@@ -34,6 +35,7 @@ header h1 {
     font-weight: 700;
     margin-bottom: 10px;
     letter-spacing: -1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .subtitle {
@@ -45,21 +47,24 @@ header h1 {
 /* Introduction */
 .intro {
     padding: 40px 60px;
-    background-color: #f8f9fa;
-    border-left: 4px solid #667eea;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-left: 4px solid #6fb0ff;
     margin-bottom: 60px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-left: 4px solid #6fb0ff;
 }
 
 .lead {
     font-size: 1.3em;
     line-height: 1.8;
     margin-bottom: 20px;
-    color: #2c3e50;
+    color: #e6eef8;
 }
 
 .intro p {
     font-size: 1.1em;
-    color: #555;
+    color: #b8cfe6;
     line-height: 1.8;
 }
 
@@ -70,62 +75,67 @@ header h1 {
 
 .visualization-section h2 {
     font-size: 2em;
-    color: #2c3e50;
+    color: #e6eef8;
     margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 3px solid #667eea;
+    border-bottom: 3px solid #6fb0ff;
 }
 
 .description {
     font-size: 1.1em;
-    color: #555;
+    color: #b8cfe6;
     margin-bottom: 30px;
     line-height: 1.8;
 }
 
 /* Chart containers */
 .chart-container {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.02);
     padding: 30px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 8px;
     margin-bottom: 25px;
     min-height: 400px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.4);
 }
 
 /* Insight boxes */
 .insight-box {
-    background-color: #fff3cd;
-    border-left: 4px solid #ffc107;
+    background-color: rgba(111, 176, 255, 0.08);
+    border-left: 4px solid #6fb0ff;
     padding: 20px;
     margin-top: 20px;
     border-radius: 4px;
     font-size: 1em;
     line-height: 1.7;
+    color: #e6eef8;
+    border: 1px solid rgba(111, 176, 255, 0.15);
 }
 
 .insight-box strong {
-    color: #856404;
+    color: #6fb0ff;
 }
 
 /* Conclusion */
 .conclusion {
     padding: 50px 60px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #0b3d91 0%, #071226 100%);
     border-radius: 8px;
     margin: 60px 0 40px 0;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
 }
 
 .conclusion h2 {
     font-size: 2em;
-    color: #2c3e50;
+    color: #e6eef8;
     margin-bottom: 20px;
 }
 
 .conclusion p {
     font-size: 1.15em;
     line-height: 1.9;
-    color: #2c3e50;
+    color: #b8cfe6;
     margin-bottom: 15px;
 }
 
@@ -133,9 +143,10 @@ header h1 {
 footer {
     text-align: center;
     padding: 40px 20px;
-    background-color: #2c3e50;
-    color: white;
+    background-color: #071226;
+    color: #b8cfe6;
     margin: 60px -20px -20px -20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 footer p {
@@ -144,13 +155,13 @@ footer p {
 }
 
 footer a {
-    color: #667eea;
+    color: #6fb0ff;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 footer a:hover {
-    color: #5566d8;
+    color: #9fc9ff;
     text-decoration: underline;
 }
 
@@ -161,12 +172,17 @@ footer a:hover {
 
 .axis path,
 .axis line {
-    stroke: #ccc;
+    stroke: rgba(255, 255, 255, 0.1);
     shape-rendering: crispEdges;
 }
 
 .axis text {
-    fill: #666;
+    fill: #b8cfe6;
+}
+
+.axis-label {
+    fill: #e6eef8;
+    font-size: 14px;
 }
 
 .line {
@@ -193,6 +209,10 @@ footer a:hover {
 
 .legend {
     font-size: 14px;
+}
+
+.legend text {
+    fill: #e6eef8;
 }
 
 .legend-item {
@@ -236,7 +256,7 @@ footer a:hover {
 
 /* Grid lines */
 .grid line {
-    stroke: #e0e0e0;
+    stroke: rgba(255, 255, 255, 0.05);
     stroke-opacity: 0.7;
     shape-rendering: crispEdges;
 }

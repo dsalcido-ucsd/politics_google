@@ -1,26 +1,44 @@
-// User Data Requests Visualization - Multi-line Chart
+// User Data Requests Visualization - Multi-line Chart with Linked Brushing
 
 function createDataRequestsChart(data, containerId) {
     // Set dimensions
-    const margin = { top: 20, right: 120, bottom: 60, left: 80 };
-    const width = 1000 - margin.left - margin.right;
-    const height = 500 - margin.top - margin.bottom;
+    const margin = { top: 50, right: 140, bottom: 60, left: 80 };
+    const totalWidth = 1000;
+    const totalHeight = 500;
+    const width = totalWidth - margin.left - margin.right;
+    const height = totalHeight - margin.top - margin.bottom;
 
     // Clear any existing chart
     d3.select(`#${containerId}`).selectAll('*').remove();
 
-    // Create SVG
+    // Create responsive SVG with viewBox
     const svg = d3.select(`#${containerId}`)
         .append('svg')
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom)
+        .attr('viewBox', `0 0 ${totalWidth} ${totalHeight}`)
+        .attr('preserveAspectRatio', 'xMidYMid meet')
+        .style('width', '100%')
+        .style('height', 'auto')
+        .style('max-height', '500px')
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    // Add chart title inside SVG
+    svg.append('text')
+        .attr('class', 'chart-title')
+        .attr('x', width / 2)
+        .attr('y', -25)
+        .attr('text-anchor', 'middle')
+        .style('font-size', '16px')
+        .style('font-weight', 'bold')
+        .style('fill', '#e6eef8')
+        .text('Government Data Requests Over Time (2009–2024)');
 
     // Create scales
     const x = d3.scaleTime()
         .domain(d3.extent(data, d => d.date))
         .range([0, width]);
+
+    const xOriginalDomain = x.domain();
 
     const y = d3.scaleLinear()
         .domain([0, d3.max(data, d => Math.max(d.requests, d.accounts))])
@@ -30,6 +48,14 @@ function createDataRequestsChart(data, containerId) {
     const y2 = d3.scaleLinear()
         .domain([0, 100])
         .range([height, 0]);
+
+    // Add clip path
+    svg.append('defs')
+        .append('clipPath')
+        .attr('id', 'clip-requests')
+        .append('rect')
+        .attr('width', width)
+        .attr('height', height);
 
     // Add grid lines
     svg.append('g')
@@ -55,32 +81,63 @@ function createDataRequestsChart(data, containerId) {
         .y(d => y2(d.disclosureRate))
         .curve(d3.curveMonotoneX);
 
+    // Main chart group with clipping
+    const chartArea = svg.append('g')
+        .attr('clip-path', 'url(#clip-requests)');
+
     // Draw lines
-    svg.append('path')
+    chartArea.append('path')
         .datum(data)
-        .attr('class', 'line')
+        .attr('class', 'line requests-line')
         .attr('d', requestsLine)
+        .style('fill', 'none')
         .style('stroke', '#4A90E2')
         .style('stroke-width', 3);
 
-    svg.append('path')
+    chartArea.append('path')
         .datum(data)
-        .attr('class', 'line')
+        .attr('class', 'line accounts-line')
         .attr('d', accountsLine)
+        .style('fill', 'none')
         .style('stroke', '#E24A4A')
         .style('stroke-width', 3);
 
-    svg.append('path')
+    chartArea.append('path')
         .datum(data)
-        .attr('class', 'line')
+        .attr('class', 'line disclosure-line')
         .attr('d', disclosureLine)
+        .style('fill', 'none')
         .style('stroke', '#F5A623')
         .style('stroke-width', 2)
         .style('stroke-dasharray', '5,5');
 
+    // Listen for linked brush events
+    window.addEventListener('timeRangeBrush', (e) => {
+        if (e.detail.source !== 'data-requests' && e.detail.extent) {
+            const [start, end] = e.detail.extent;
+            x.domain([start, end]);
+            updateLines();
+        }
+    });
+
+    function updateLines() {
+        chartArea.select('.requests-line')
+            .transition().duration(500)
+            .attr('d', requestsLine);
+        chartArea.select('.accounts-line')
+            .transition().duration(500)
+            .attr('d', accountsLine);
+        chartArea.select('.disclosure-line')
+            .transition().duration(500)
+            .attr('d', disclosureLine);
+        svg.select('.x-axis')
+            .transition().duration(500)
+            .call(d3.axisBottom(x).ticks(10));
+    }
+
     // Add x-axis
     svg.append('g')
-        .attr('class', 'axis')
+        .attr('class', 'axis x-axis')
         .attr('transform', `translate(0,${height})`)
         .call(d3.axisBottom(x).ticks(10));
 
@@ -130,14 +187,25 @@ function createDataRequestsChart(data, containerId) {
         { label: 'Disclosure Rate', color: '#F5A623', dash: true }
     ];
 
-    const legend = svg.selectAll('.legend')
+    const legend = svg.append('g')
+        .attr('class', 'legend-group')
+        .attr('transform', `translate(${width + 15}, 0)`);
+
+    legend.append('text')
+        .attr('x', 0)
+        .attr('y', -10)
+        .style('font-size', '10px')
+        .style('fill', '#b8cfe6')
+        .text('Metrics:');
+
+    const legendItems = legend.selectAll('.legend-item')
         .data(legendData)
         .enter()
         .append('g')
-        .attr('class', 'legend')
-        .attr('transform', (d, i) => `translate(${width + 10},${i * 25})`);
+        .attr('class', 'legend-item')
+        .attr('transform', (d, i) => `translate(0,${i * 28 + 5})`);
 
-    legend.append('line')
+    legendItems.append('line')
         .attr('x1', 0)
         .attr('x2', 20)
         .attr('y1', 9)
@@ -146,18 +214,18 @@ function createDataRequestsChart(data, containerId) {
         .style('stroke-width', 2)
         .style('stroke-dasharray', d => d.dash ? '5,5' : 'none');
 
-    legend.append('text')
-        .attr('x', 24)
+    legendItems.append('text')
+        .attr('x', 26)
         .attr('y', 9)
         .attr('dy', '.35em')
-        .style('font-size', '13px')
+        .style('font-size', '11px')
+        .style('fill', '#e6eef8')
         .text(d => d.label);
 
     // Add tooltip
-    const tooltip = d3.select('body')
-        .append('div')
-        .attr('class', 'tooltip')
-        .style('opacity', 0);
+    const tooltip = d3.select('body').select('.tooltip').empty() 
+        ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+        : d3.select('body').select('.tooltip');
 
     // Tooltip interaction
     const focus = svg.append('g')
@@ -167,7 +235,7 @@ function createDataRequestsChart(data, containerId) {
         .attr('class', 'focus-line')
         .attr('y1', 0)
         .attr('y2', height)
-        .style('stroke', 'black')
+        .style('stroke', 'white')
         .style('stroke-width', 1)
         .style('opacity', 0.5);
 
@@ -194,13 +262,21 @@ function createDataRequestsChart(data, containerId) {
 
                 tooltip.html(`
                     <strong>${d3.timeFormat('%B %Y')(d.date)}</strong><br/>
-                    Requests: ${d3.format(',')(d.requests)}<br/>
-                    Accounts: ${d3.format(',')(d.accounts)}<br/>
-                    Disclosure Rate: ${d3.format('.1f')(d.disclosureRate)}%
+                    <span style="color:#4A90E2">●</span> Requests: ${d3.format(',')(d.requests)}<br/>
+                    <span style="color:#E24A4A">●</span> Accounts: ${d3.format(',')(d.accounts)}<br/>
+                    <span style="color:#F5A623">●</span> Disclosure Rate: ${d3.format('.1f')(d.disclosureRate)}%
                 `)
                     .style('left', (event.pageX + 15) + 'px')
                     .style('top', (event.pageY - 28) + 'px')
                     .style('opacity', 1);
             }
         });
+
+    // Return chart API
+    return {
+        updateTimeRange: (extent) => {
+            x.domain(extent);
+            updateLines();
+        }
+    };
 }

@@ -1,21 +1,37 @@
-// Content Removal Visualization - Stacked Bar Chart
+// Content Removal Visualization - Stacked Bar Chart with Responsive SVG
 
 function createContentRemovalChart(data, containerId) {
     // Set dimensions
-    const margin = { top: 20, right: 200, bottom: 80, left: 80 };
-    const width = 1000 - margin.left - margin.right;
-    const height = 500 - margin.top - margin.bottom;
+    const margin = { top: 50, right: 200, bottom: 80, left: 80 };
+    const totalWidth = 1000;
+    const totalHeight = 500;
+    const width = totalWidth - margin.left - margin.right;
+    const height = totalHeight - margin.top - margin.bottom;
 
     // Clear any existing chart
     d3.select(`#${containerId}`).selectAll('*').remove();
 
-    // Create SVG
+    // Create responsive SVG with viewBox
     const svg = d3.select(`#${containerId}`)
         .append('svg')
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom)
+        .attr('viewBox', `0 0 ${totalWidth} ${totalHeight}`)
+        .attr('preserveAspectRatio', 'xMidYMid meet')
+        .style('width', '100%')
+        .style('height', 'auto')
+        .style('max-height', '500px')
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    // Add chart title inside SVG
+    svg.append('text')
+        .attr('class', 'chart-title')
+        .attr('x', width / 2)
+        .attr('y', -25)
+        .attr('text-anchor', 'middle')
+        .style('font-size', '16px')
+        .style('font-weight', 'bold')
+        .style('fill', '#e6eef8')
+        .text('Content Removal Requests by Reason (2011–2024)');
 
     // Get top 8 reasons by total
     const reasonTotals = d3.rollup(data, v => d3.sum(v, d => d.total), d => d.reason);
@@ -128,30 +144,42 @@ function createContentRemovalChart(data, containerId) {
         .text('Number of Removal Requests');
 
     // Add legend
-    const legend = svg.selectAll('.legend')
+    const legend = svg.append('g')
+        .attr('class', 'legend-group')
+        .attr('transform', `translate(${width + 15}, 0)`);
+
+    legend.append('text')
+        .attr('x', 0)
+        .attr('y', -10)
+        .style('font-size', '10px')
+        .style('fill', '#b8cfe6')
+        .text('Removal Reasons:');
+
+    const legendItems = legend.selectAll('.legend-item')
         .data(topReasons)
         .enter()
         .append('g')
-        .attr('class', 'legend')
-        .attr('transform', (d, i) => `translate(${width + 10},${i * 25})`);
+        .attr('class', 'legend-item')
+        .attr('transform', (d, i) => `translate(0,${i * 24 + 5})`);
 
-    legend.append('rect')
-        .attr('width', 18)
-        .attr('height', 18)
+    legendItems.append('rect')
+        .attr('width', 14)
+        .attr('height', 14)
+        .attr('rx', 2)
         .style('fill', d => colorScale(d));
 
-    legend.append('text')
-        .attr('x', 24)
-        .attr('y', 9)
+    legendItems.append('text')
+        .attr('x', 20)
+        .attr('y', 7)
         .attr('dy', '.35em')
-        .style('font-size', '11px')
-        .text(d => d);
+        .style('font-size', '10px')
+        .style('fill', '#e6eef8')
+        .text(d => d.length > 18 ? d.slice(0, 16) + '...' : d);
 
     // Add tooltip
-    const tooltip = d3.select('body')
-        .append('div')
-        .attr('class', 'tooltip')
-        .style('opacity', 0);
+    const tooltip = d3.select('body').select('.tooltip').empty() 
+        ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+        : d3.select('body').select('.tooltip');
 
     // Tooltip interaction
     layers.selectAll('rect')

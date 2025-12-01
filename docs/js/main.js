@@ -239,7 +239,7 @@ function createStateSpendingChart(data, containerId) {
 
 // Aligned timelines visualization
 function createAlignedTimelines(data, containerId) {
-    const margin = { top: 50, right: 80, bottom: 60, left: 100 };
+    const margin = { top: 50, right: 80, bottom: 60, left: 120 };
     const totalWidth = 1000;
     const chartHeight = 120;
     const spacing = 40;
@@ -339,9 +339,10 @@ function createAlignedTimelines(data, containerId) {
         .call(d3.axisLeft(y1).ticks(3).tickFormat(d => `$${d3.format('.2s')(d)}`));
 
     g1.append('text')
-        .attr('x', -10)
+        .attr('x', -70)
         .attr('y', chartHeight / 2)
-        .attr('text-anchor', 'end')
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
         .style('font-weight', 'bold')
         .style('font-size', '12px')
         .style('fill', '#667eea')
@@ -392,9 +393,10 @@ function createAlignedTimelines(data, containerId) {
         .call(d3.axisLeft(y2).ticks(3).tickFormat(d => d3.format('.2s')(d)));
 
     g2.append('text')
-        .attr('x', -10)
+        .attr('x', -70)
         .attr('y', chartHeight / 2)
-        .attr('text-anchor', 'end')
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
         .style('font-weight', 'bold')
         .style('font-size', '12px')
         .style('fill', '#4A90E2')
@@ -449,9 +451,10 @@ function createAlignedTimelines(data, containerId) {
         .call(d3.axisLeft(y3).ticks(3));
 
     g3.append('text')
-        .attr('x', -10)
+        .attr('x', -70)
         .attr('y', chartHeight / 2)
-        .attr('text-anchor', 'end')
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
         .style('font-weight', 'bold')
         .style('font-size', '12px')
         .style('fill', '#E24A4A')

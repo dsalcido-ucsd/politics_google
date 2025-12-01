@@ -442,14 +442,14 @@ function createPoliticalAdsChart(data, containerId) {
     // Add legend with click interaction
     const legend = svg.append('g')
         .attr('class', 'legend-group')
-        .attr('transform', `translate(${width + 15}, 120)`);
+        .attr('transform', `translate(${width + 15}, 140)`);
 
     legend.append('text')
         .attr('x', 0)
         .attr('y', -10)
         .style('font-size', '10px')
         .style('fill', '#b8cfe6')
-        .text('Filter Party:');
+        .text('Filter by Party:');
 
     const legendItems = legend.selectAll('.legend-item')
         .data(parties)

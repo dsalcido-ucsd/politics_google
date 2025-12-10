@@ -8,10 +8,6 @@ This project explores how political actors in the United States interact with Go
 
 The goal is to build an explorable explanation web page using **Python for data preparation** and **D3.js** for interactive visualizations.
 
-## Live Demo
-
-🔗 [View the visualization](https://dsalcido-ucsd.github.io/populationpeak/)
-
 ---
 
 ## Project Structure
@@ -60,21 +56,3 @@ politics_google/
 - [Google User Data Requests](https://transparencyreport.google.com/user-data/overview)
 - [Google Government Removal Requests](https://transparencyreport.google.com/government-removals/overview)
 
-## Development
-
-To run locally, simply serve the `docs/` folder with any static file server:
-
-```bash
-# Using Python
-cd docs
-python -m http.server 8000
-
-# Using Node.js
-npx serve docs
-```
-
-Then open http://localhost:8000 in your browser.
-
----
-
-Created for DSC 209 Data Visualization | University of California, San Diego

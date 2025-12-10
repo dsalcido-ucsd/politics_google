@@ -210,7 +210,7 @@ function createPoliticalAdsChart(data, containerId) {
         }
 
         // Update axes
-        svg.select('.x-axis')
+        svg.select('.x-axis-main')
             .transition()
             .duration(500)
             .call(d3.axisBottom(x).ticks(10));
@@ -296,7 +296,7 @@ function createPoliticalAdsChart(data, containerId) {
 
     // Add x-axis
     svg.append('g')
-        .attr('class', 'axis x-axis')
+        .attr('class', 'axis x-axis-main')
         .attr('transform', `translate(0,${height})`)
         .call(d3.axisBottom(x).ticks(10));
 
@@ -356,7 +356,7 @@ function createPoliticalAdsChart(data, containerId) {
         .attr('d', area2);
 
     context.append('g')
-        .attr('class', 'axis x-axis')
+        .attr('class', 'axis x-axis-context')
         .attr('transform', `translate(0,${height2})`)
         .call(d3.axisBottom(x2).ticks(8));
 

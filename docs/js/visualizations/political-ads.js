@@ -134,7 +134,7 @@ function createPoliticalAdsChart(data, containerId) {
     }
 
     // Function to update chart based on visible parties
-    function updateChart(extent = null, skipBrushDispatch = false) {
+    function updateChart(extent = null) {
         const currentParties = parties.filter(p => visibleParties.has(p));
         
         if (extent) {
@@ -233,13 +233,6 @@ function createPoliticalAdsChart(data, containerId) {
 
         // Draw election lines
         drawElectionLines();
-
-        // Dispatch linked brush event
-        if (!skipBrushDispatch && extent) {
-            window.dispatchEvent(new CustomEvent('timeRangeBrush', {
-                detail: { extent: extent, source: 'political-ads' }
-            }));
-        }
     }
 
     // Create scales
@@ -375,13 +368,6 @@ function createPoliticalAdsChart(data, containerId) {
             updateChart(extent);
         }
     }
-
-    // Listen for linked brush events from other charts
-    window.addEventListener('timeRangeBrush', (e) => {
-        if (e.detail.source !== 'political-ads' && e.detail.extent) {
-            updateChart(e.detail.extent, true);
-        }
-    });
 
     // Mode toggle buttons
     const toggleGroup = svg.append('g')
@@ -609,7 +595,6 @@ function createPoliticalAdsChart(data, containerId) {
 
     // Return chart API for external control
     return {
-        updateTimeRange: (extent) => updateChart(extent, true),
         setMode: setMode,
         getDateData: () => dateData
     };

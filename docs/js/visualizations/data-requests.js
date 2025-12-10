@@ -111,30 +111,6 @@ function createDataRequestsChart(data, containerId) {
         .style('stroke-width', 2)
         .style('stroke-dasharray', '5,5');
 
-    // Listen for linked brush events
-    window.addEventListener('timeRangeBrush', (e) => {
-        if (e.detail.source !== 'data-requests' && e.detail.extent) {
-            const [start, end] = e.detail.extent;
-            x.domain([start, end]);
-            updateLines();
-        }
-    });
-
-    function updateLines() {
-        chartArea.select('.requests-line')
-            .transition().duration(500)
-            .attr('d', requestsLine);
-        chartArea.select('.accounts-line')
-            .transition().duration(500)
-            .attr('d', accountsLine);
-        chartArea.select('.disclosure-line')
-            .transition().duration(500)
-            .attr('d', disclosureLine);
-        svg.select('.x-axis')
-            .transition().duration(500)
-            .call(d3.axisBottom(x).ticks(10));
-    }
-
     // Add x-axis
     svg.append('g')
         .attr('class', 'axis x-axis')

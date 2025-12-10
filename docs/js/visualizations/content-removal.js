@@ -196,4 +196,20 @@ function createContentRemovalChart(data, containerId) {
         .on('mouseout', () => {
             tooltip.style('opacity', 0);
         });
+
+    // Add chart annotation for defamation
+    const annotationGroup = svg.append('g').attr('class', 'chart-annotations');
+    
+    // Find the defamation total
+    const defamationTotal = Array.from(reasonTotals).find(d => d[0].toLowerCase().includes('defamation'));
+    if (defamationTotal) {
+        annotationGroup.append('text')
+            .attr('x', width / 2)
+            .attr('y', height + 70)
+            .attr('text-anchor', 'middle')
+            .style('fill', '#6fb0ff')
+            .style('font-size', '12px')
+            .style('font-style', 'italic')
+            .text(`Defamation alone: ${d3.format(',')(defamationTotal[1])} requests (${Math.round(defamationTotal[1] / d3.sum(Array.from(reasonTotals.values())) * 100)}% of total)`);
+    }
 }

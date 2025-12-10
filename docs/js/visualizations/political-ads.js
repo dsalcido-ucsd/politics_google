@@ -561,6 +561,35 @@ function createPoliticalAdsChart(data, containerId) {
     // Initial render
     updateChart();
 
+    // Add chart annotations after initial render
+    const annotationGroup = svg.append('g').attr('class', 'chart-annotations');
+    
+    // Find the 2020 election peak for annotation
+    const oct2020 = dateData.find(d => d.date.getFullYear() === 2020 && d.date.getMonth() === 9);
+    if (oct2020) {
+        const peakX = x(oct2020.date);
+        const peakY = y(oct2020.Democratic + oct2020.Republican + oct2020.Other);
+        
+        // Annotation line
+        annotationGroup.append('line')
+            .attr('x1', peakX)
+            .attr('y1', peakY)
+            .attr('x2', peakX - 60)
+            .attr('y2', peakY - 50)
+            .style('stroke', '#e6eef8')
+            .style('stroke-width', 1)
+            .style('opacity', 0.6);
+        
+        // Annotation text
+        annotationGroup.append('text')
+            .attr('x', peakX - 65)
+            .attr('y', peakY - 55)
+            .attr('text-anchor', 'end')
+            .style('fill', '#e6eef8')
+            .style('font-size', '11px')
+            .text('2020 election peak: $98M/week');
+    }
+
     // Return chart API for external control
     return {
         updateTimeRange: (extent) => updateChart(extent, true),

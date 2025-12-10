@@ -272,6 +272,27 @@ function createDataRequestsChart(data, containerId) {
             }
         });
 
+    // Add chart annotation showing growth
+    const annotationGroup = svg.append('g').attr('class', 'chart-annotations');
+    
+    // Find earliest and latest data points
+    const firstPoint = data[0];
+    const lastPoint = data[data.length - 1];
+    
+    if (firstPoint && lastPoint) {
+        // Arrow and growth annotation
+        const growthFactor = Math.round(lastPoint.requests / firstPoint.requests);
+        
+        annotationGroup.append('text')
+            .attr('x', width - 10)
+            .attr('y', y(lastPoint.requests) - 15)
+            .attr('text-anchor', 'end')
+            .style('fill', '#4A90E2')
+            .style('font-size', '12px')
+            .style('font-weight', 'bold')
+            .text(`${growthFactor}x growth since 2009`);
+    }
+
     // Return chart API
     return {
         updateTimeRange: (extent) => {

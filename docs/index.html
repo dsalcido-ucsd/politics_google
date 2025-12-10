@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +16,13 @@
             <p class="author">David Salcido | DSC 209 Data Visualization | UC San Diego</p>
         </header>
 
+        <!-- Hook Statistic -->
+        <section class="hook-stat">
+            <div class="big-number">$2.2 Billion</div>
+            <div class="hook-context">spent on Google political ads since 2018</div>
+            <div class="hook-subtext">But who's really spending it? The answer might surprise you.</div>
+        </section>
+
         <!-- Introduction -->
         <section class="intro">
             <p class="lead">
@@ -28,9 +35,15 @@
                 <strong>advertising platforms</strong> for persuasion, 
                 <strong>data requests</strong> for surveillance, and 
                 <strong>content removal requests</strong> for censorship.
-                This explorable explanation reveals patterns you might find surprising.
+                Scroll down to explore patterns you might find surprising.
             </p>
         </section>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
 
         <!-- Visualization 1: Political Advertising by Party -->
         <section class="visualization-section">
@@ -120,21 +133,31 @@
         <!-- Conclusion -->
         <section class="conclusion">
             <h2>The One Thing to Remember</h2>
-            <p>
-                <strong style="font-size: 1.3em; color: #6fb0ff;">
-                    Google isn't just a search engine. It's infrastructure for political power.
-                </strong>
-            </p>
-            <p>
-                We looked at three interfaces, and found three very different patterns.
-            </p>
-            <p style="margin: 15px 0; color: #e6eef8; line-height: 1.8;">
-                Advertising is cyclical and expensive, and it's dominated by shadowy PACs rather than the parties themselves.
-                Surveillance through data requests is persistent, has grown 17 times since 2009, and neither party has slowed it down.
-                Content removal focuses on protecting reputations, not fighting terrorism or protecting national security.
-            </p>
-            <p>
-                The next time you use Google, remember that you're not just a user. 
+            <div class="takeaway-box">
+                <div class="takeaway-main">
+                    Google isn't just a search engine.<br>
+                    <span class="takeaway-highlight">It's infrastructure for political power.</span>
+                </div>
+            </div>
+            <div class="conclusion-grid">
+                <div class="conclusion-card">
+                    <div class="card-icon">📢</div>
+                    <div class="card-title">Persuasion</div>
+                    <div class="card-text">Advertising is cyclical, expensive, and dominated by shadowy PACs rather than the parties.</div>
+                </div>
+                <div class="conclusion-card">
+                    <div class="card-icon">👁️</div>
+                    <div class="card-title">Surveillance</div>
+                    <div class="card-text">Data requests have grown 17x since 2009. Neither party has slowed it down.</div>
+                </div>
+                <div class="conclusion-card">
+                    <div class="card-icon">🚫</div>
+                    <div class="card-title">Censorship</div>
+                    <div class="card-text">Content removal protects reputations, not national security.</div>
+                </div>
+            </div>
+            <p class="conclusion-final">
+                The next time you use Google, remember: you're not just a user. 
                 You're a data point in a system that political actors use to persuade, surveil, and control.
             </p>
         </section>

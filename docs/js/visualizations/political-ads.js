@@ -575,30 +575,36 @@ function createPoliticalAdsChart(data, containerId) {
     // Add chart annotations after initial render
     const annotationGroup = svg.append('g').attr('class', 'chart-annotations');
     
-    // Find the 2020 election peak for annotation
-    const oct2020 = dateData.find(d => d.date.getFullYear() === 2020 && d.date.getMonth() === 9);
-    if (oct2020) {
-        const peakX = x(oct2020.date);
-        const peakY = y(oct2020.Democratic + oct2020.Republican + oct2020.Other);
+    // Find the actual peak in the data
+    const peakData = dateData.reduce((max, d) => {
+        const total = d.Democratic + d.Republican + d.Other;
+        return total > (max.Democratic + max.Republican + max.Other) ? d : max;
+    }, dateData[0]);
+    
+    if (peakData) {
+        const peakX = x(peakData.date);
+        const peakTotal = peakData.Democratic + peakData.Republican + peakData.Other;
+        const peakY = y(peakTotal);
+        const peakYear = peakData.date.getFullYear();
         
         // Annotation line
         annotationGroup.append('line')
             .attr('x1', peakX)
-            .attr('y1', peakY)
-            .attr('x2', peakX - 60)
-            .attr('y2', peakY - 50)
+            .attr('y1', peakY + 10)
+            .attr('x2', peakX - 40)
+            .attr('y2', peakY - 30)
             .style('stroke', '#e6eef8')
             .style('stroke-width', 1)
             .style('opacity', 0.6);
         
         // Annotation text
         annotationGroup.append('text')
-            .attr('x', peakX - 65)
-            .attr('y', peakY - 55)
+            .attr('x', peakX - 45)
+            .attr('y', peakY - 35)
             .attr('text-anchor', 'end')
             .style('fill', '#e6eef8')
             .style('font-size', '11px')
-            .text('2020 election peak: $98M/week');
+            .text(`${peakYear} peak: $${d3.format('.0f')(peakTotal / 1e6)}M/week`);
     }
 
     // Return chart API for external control

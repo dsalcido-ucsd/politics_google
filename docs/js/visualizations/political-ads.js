@@ -2,10 +2,10 @@
 
 function createPoliticalAdsChart(data, containerId) {
     // Set dimensions
-    const margin = { top: 60, right: 140, bottom: 100, left: 80 };
+    const margin = { top: 60, right: 140, bottom: 120, left: 80 };
     const margin2 = { top: 470, right: 140, bottom: 40, left: 80 };
     const totalWidth = 1000;
-    const totalHeight = 540;
+    const totalHeight = 580;
     const width = totalWidth - margin.left - margin.right;
     const height = 380;
     const height2 = 50;
@@ -35,7 +35,7 @@ function createPoliticalAdsChart(data, containerId) {
         .attr('preserveAspectRatio', 'xMidYMid meet')
         .style('width', '100%')
         .style('height', 'auto')
-        .style('max-height', '540px')
+        .style('max-height', '580px')
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
@@ -328,6 +328,14 @@ function createPoliticalAdsChart(data, containerId) {
         .attr('class', 'context')
         .attr('transform', `translate(0,${height + 55})`);
 
+    // Add clip path for context
+    svg.select('defs')
+        .append('clipPath')
+        .attr('id', 'clip-context')
+        .append('rect')
+        .attr('width', width)
+        .attr('height', height2);
+
     // Stack data for context
     const stackContext = d3.stack()
         .keys(parties)
@@ -336,7 +344,10 @@ function createPoliticalAdsChart(data, containerId) {
 
     const stackedDataContext = stackContext(dateData);
 
-    context.selectAll('.context-layer')
+    const contextChart = context.append('g')
+        .attr('clip-path', 'url(#clip-context)');
+
+    contextChart.selectAll('.context-layer')
         .data(stackedDataContext)
         .enter()
         .append('path')

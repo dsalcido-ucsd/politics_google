@@ -8,10 +8,6 @@ This project explores how political actors in the United States interact with Go
 
 The goal is to build an explorable explanation web page using **Python for data preparation** and **D3.js** for interactive visualizations.
 
-## Live Demo
-
-🔗 [View the visualization](https://dsalcido-ucsd.github.io/populationpeak/)
-
 ---
 
 ## Project Structure
